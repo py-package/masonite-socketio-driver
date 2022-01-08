@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="masonite_socketio_driver",
-    version='0.1.4',
+    version='0.1.5',
     author="Yubaraj Shrestha",
     author_email="companion.krish@outlook.com",
     description="Socket IO Broadcast Driver for Masonite",
