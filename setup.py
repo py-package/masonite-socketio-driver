@@ -4,12 +4,13 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setup(
-    name="masonite_socketio_driver",
-    version='2.0.0',
+    name="socketio_driver",
+    version='2.0.1',
     packages=[
-        "masonite_socketio_driver",
-        "masonite_socketio_driver.drivers",
-        "masonite_socketio_driver.providers"
+        "socketio_driver",
+        "socketio_driver.config",
+        "socketio_driver.drivers",
+        "socketio_driver.providers"
     ],
     package_dir={"": "src"},
     description="Socket IO Broadcast Driver for Masonite",
