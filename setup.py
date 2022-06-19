@@ -4,8 +4,8 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setup(
-    name="socketio_driver",
-    version='2.0.2',
+    name="masonite-socketio-driver",
+    version='2.0.3',
     packages=[
         "socketio_driver",
         "socketio_driver.config",
