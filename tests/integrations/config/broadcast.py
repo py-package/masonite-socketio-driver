@@ -14,6 +14,6 @@ BROADCASTS = {
     "socketio": {
         "driver": "socketio",
         "host": env("BROADCAST_HOST", "localhost"),
-        "port": env("BROADCAST_PORT", "6379")
+        "port": env("BROADCAST_PORT", "6379"),
     },
 }

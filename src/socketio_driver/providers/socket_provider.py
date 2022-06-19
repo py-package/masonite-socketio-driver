@@ -8,11 +8,7 @@ from ..drivers.socket_driver import SocketDriver
 class SocketProvider(PackageProvider):
     def configure(self):
         """Register objects into the Service Container."""
-        (
-            self.root("socketio_driver")
-            .name("socketio")
-            .config("config/socketio.py", publish=False)
-        )
+        (self.root("socketio_driver").name("socketio").config("config/socketio.py", publish=False))
 
     def register(self):
         super().register()

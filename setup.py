@@ -1,11 +1,11 @@
-from setuptools import setup, find_packages
+from setuptools import setup
 
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setup(
     name="masonite_socketio_driver",
-    version='0.1.7',
+    version='2.0.0',
     packages=[
         "masonite_socketio_driver",
         "masonite_socketio_driver.drivers",

@@ -11,10 +11,6 @@ class WelcomeController(Controller):
         return view.render("welcome")
 
     def broadcast(self, view: View, broadcast: Broadcast):
-        broadcast_data = {
-            "message": "Hello World"
-        }
+        broadcast_data = {"message": "Hello World"}
         broadcast.channel(["default"], "welcome", broadcast_data)
-        return {
-            "hello": "world!"
-        }
+        return {"hello": "world!"}
