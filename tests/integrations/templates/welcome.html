@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block title %}Welcome on Masonite 4{% endblock %}
+
+{% block content %}
+<div class="h-screen flex flex-col items-center justify-center">
+  <img src="/logo.png" alt="Masonite Logo" class="h-16 w-16 mb-4">
+
+  <nav class="flex space-x-4 justify-center text-gray-500 uppercase text-sm">
+    <span id="test" class="py-2 px-8 bg-red-400 cursor-pointer rounded text-white">Test</span>
+  </nav>
+
+</div>
+{% endblock %}
+
+{% block js %}
+<script>
+  function getQueryString() {
+    const queryString = {};
+    const query = window.location.search.substring(1);
+    const vars = query.split("&");
+    for (let i = 0; i < vars.length; i++) {
+      const pair = vars[i].split("=");
+      // If first entry with this name
+      if (typeof queryString[pair[0]] === "undefined") {
+        queryString[pair[0]] = decodeURIComponent(pair[1]);
+      } else if (typeof queryString[pair[0]] === "string") {
+        queryString[pair[0]] = [queryString[pair[0]], decodeURIComponent(pair[1])];
+      } else {
+        queryString[pair[0]].push(decodeURIComponent(pair[1]));
+      }
+    }
+    return queryString['channel'];
+  }
+
+  // get url query string ?channel=test
+  var channel = getQueryString() ?? "default";
+
+  if (MasoniteBroadcastClient !== undefined) {
+
+    const broadcast = new MasoniteBroadcastClient({
+      url: 'http://localhost:3000/',
+    })
+
+    broadcast.listen("welcome", (data) => {
+      console.log(data);
+    });
+
+    broadcast.listen("chat", (data) => {
+      console.log("Chat Data", data);
+    })
+
+    broadcast.listen("PublicEvent", (data) => {
+      console.log(data);
+    });
+
+    broadcast.listen("PrivateEvent", (data) => {
+      console.log(data);
+    });
+
+    const TestButton = document.getElementById("test");
+    TestButton.addEventListener("click", () => {
+      broadcast.speak("welcome", {
+        message: "Hello World",
+      });
+    });
+  }
+</script>
+{% endblock %}

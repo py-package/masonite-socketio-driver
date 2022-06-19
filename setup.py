@@ -6,25 +6,60 @@ with open("README.md", "r", encoding="utf-8") as fh:
 setup(
     name="masonite_socketio_driver",
     version='0.1.7',
-    author="Yubaraj Shrestha",
-    author_email="companion.krish@outlook.com",
+    packages=[
+        "masonite_socketio_driver",
+        "masonite_socketio_driver.drivers",
+        "masonite_socketio_driver.providers"
+    ],
+    package_dir={"": "src"},
     description="Socket IO Broadcast Driver for Masonite",
     long_description=long_description,
     long_description_content_type="text/markdown",
+    # The project's main homepage.
     url="https://github.com/yubarajshrestha/masonite-socketio-driver",
+    # Author details
+    author="Yubaraj Shrestha",
+    author_email="companion.krish@outlook.com",
     project_urls={
         "Bug Tracker": "https://github.com/yubarajshrestha/masonite-socketio-driver/issues",
     },
     classifiers=[
-        "Programming Language :: Python :: 3",
+        # How mature is this project? Common values are
+        #   3 - Alpha
+        #   4 - Beta
+        #   5 - Production/Stable
+        "Development Status :: 3 - Alpha",
+        # Indicate who your project is intended for
+        "Intended Audience :: Developers",
+        "Environment :: Web Environment",
+        # Pick your license as you wish (should match "license" above)
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: OS Independent",
+        # Specify the Python versions you support here. In particular, ensure
+        # that you indicate whether you support Python 2, Python 3 or both.
+        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Topic :: Software Development :: Libraries :: Application Frameworks",
+        "Topic :: Software Development :: Libraries :: Python Modules",
+        # List package on masonite packages website
         "Framework :: Masonite",
     ],
-    packages=["masonite_socketio_driver"],
-    package_dir={"masonite_socketio_driver": "src"},
-    install_requires=[
-        'masonite>=4.0,<5.0',
-        'socket.io-emitter',
-    ],
+    keywords=["masonite", "socket-io", "broadcast", "masonite-socket-io-broadcast-driver"],
+    install_requires=["masonite>=4.0<5.0", 'socket.io-emitter', 'redis', 'msgpack'],
     license="MIT",
-    keywords=["masonite", "socket-io", "broadcast", "masonite-socket-io-broadcast-driver"]
+    extras_require={
+        "dev": [
+            "black",
+            "flake8",
+            "coverage",
+            "pytest",
+            "pytest-cov",
+            "twine>=1.5.0",
+            "wheel",
+        ],
+    },
+    package_data={
+        'templates/index.html': [],
+    },
 )
