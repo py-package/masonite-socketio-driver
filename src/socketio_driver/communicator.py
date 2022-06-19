@@ -14,12 +14,12 @@ class Communicator:
 
         self.uid = "communicator"
 
-        if 'client' in self._opts and self._opts['client'] is not None:
-            self._client = self._opts['client']
+        if "client" in self._opts and self._opts["client"] is not None:
+            self._client = self._opts["client"]
         else:
             self._client = self._createClient()
 
-        self._key = self._opts.get("key", 'socket.io')
+        self._key = self._opts.get("key", "socket.io")
 
     # Limit emission to a certain `room`.
     def In(self, *room):
@@ -32,7 +32,7 @@ class Communicator:
 
     # Limit emission to certain `namespace`.
     def Of(self, nsp):
-        self._flags['nsp'] = nsp
+        self._flags["nsp"] = nsp
         return self
 
     # Send the packet.
@@ -40,27 +40,27 @@ class Communicator:
         packet = {}
         extras = {}
 
-        packet['data'] = args
-        packet['type'] = self.BINARY_EVENT if self._hasBin(args) else self.EVENT
+        packet["data"] = args
+        packet["type"] = self.BINARY_EVENT if self._hasBin(args) else self.EVENT
 
         # set namespace to packet
-        if 'nsp' in self._flags:
-            packet['nsp'] = self._flags['nsp']
-            del self._flags['nsp']
+        if "nsp" in self._flags:
+            packet["nsp"] = self._flags["nsp"]
+            del self._flags["nsp"]
         else:
-            packet['nsp'] = '/'
+            packet["nsp"] = "/"
 
-        extras['flags'] = self._flags if len(self._flags) > 0 else ''
+        extras["flags"] = self._flags if len(self._flags) > 0 else ""
 
         rooms = self._getRooms()
-        extras['rooms'] = rooms if len(rooms) > 0 else ''
+        extras["rooms"] = rooms if len(rooms) > 0 else ""
 
-        if extras['rooms']:
+        if extras["rooms"]:
             for room in rooms:
-                chn = "#".join((self._key, packet['nsp'], room, ""))
+                chn = "#".join((self._key, packet["nsp"], room, ""))
                 self._client.publish(chn, msgpack.packb([self.uid, packet, extras]))
         else:
-            chn = "#".join((self._key, packet['nsp'], ""))
+            chn = "#".join((self._key, packet["nsp"], ""))
             self._client.publish(chn, msgpack.packb([self.uid, packet, extras]))
 
         self._flags = {}
@@ -85,18 +85,18 @@ class Communicator:
 
     # Create a redis client from a `host:port` uri string.
     def _createClient(self):
-        if not 'host' in self._opts:
-            raise Exception('Missing redis `host`')
-        if not 'port' in self._opts:
-            raise Exception('Missing redis `port`')
+        if "host" not in self._opts:
+            raise Exception("Missing redis `host`")
+        if "port" not in self._opts:
+            raise Exception("Missing redis `port`")
 
         kwargs = {
-            'host': self._opts['host'],
-            'port': self._opts['port'],
+            "host": self._opts["host"],
+            "port": self._opts["port"],
         }
 
-        if 'password' in self._opts:
-            kwargs['password'] = self._opts['password']
+        if "password" in self._opts:
+            kwargs["password"] = self._opts["password"]
 
         return redis.StrictRedis(**kwargs)
 
