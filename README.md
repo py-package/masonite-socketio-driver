@@ -1,8 +1,23 @@
 #### Project description
 
+<p align="center">
+    <img src="https://banners.beyondco.de/Masonite%20SocketIO%20Driver.png?theme=light&packageManager=pip+install&packageName=masonite-socketio-driver&pattern=charlieBrown&style=style_2&description=Driver+support+for+SocketIO+in+masonite+4.&md=1&showWatermark=1&fontSize=100px&images=adjustments&widths=50&heights=50">
+</p>
+
+<p align="center">
+  <img alt="PyPI" src="https://img.shields.io/pypi/v/masonite-socketio-driver">
+  <img alt="issues" src="https://img.shields.io/github/issues/yubarajshrestha/masonite-socketio-driver">
+  <img src="https://img.shields.io/badge/python-3.7+-blue.svg" alt="Python Version">
+  <img alt="GitHub release (latest by date including pre-releases)" src="https://img.shields.io/github/v/release/yubarajshrestha/masonite-socketio-driver">
+  <img alt="License" src="https://img.shields.io/github/license/yubarajshrestha/masonite-socketio-driver">
+  <a href="https://github.com/yubarajshrestha/masonite-socketio-driver/stargazers"><img alt="star" src="https://img.shields.io/github/stars/yubarajshrestha/masonite-socketio-driver" /></a>
+  <img alt="downloads" src="https://img.shields.io/pypi/dm/masonite-socketio-driver?style=flat" />
+  <a href="https://github.com/psf/black"><img alt="Code style: black" src="https://img.shields.io/badge/code%20style-black-000000.svg"></a>
+</p>
+
 **What is Minio-Driver?**
 
-It's an extra broadcast driver support for Minio in masonite 4, it extends default masonite broadcast driver to support SocketIO.
+It's an extra broadcast driver support for SocketIO in masonite 4, it extends default masonite broadcast driver to support SocketIO.
 
 **Setup**
 
