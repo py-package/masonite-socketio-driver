@@ -30,12 +30,12 @@ pip install masonite-socketio-driver
 Add provider inside config/providers.py.
 
 ```python
-from masonite_socketio_driver.masonite_socketio_provider import MasoniteSocketioProvider
+from socketio_driver.providers import SocketProvider
 
 PROVIDERS = [
     ...,
     # Application Providers
-    MasoniteSocketioProvider,
+    SocketProvider,
 ]
 ```
 
