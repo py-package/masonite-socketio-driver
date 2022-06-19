@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="socketio_driver",
-    version='2.0.1',
+    version='2.0.2',
     packages=[
         "socketio_driver",
         "socketio_driver.config",
