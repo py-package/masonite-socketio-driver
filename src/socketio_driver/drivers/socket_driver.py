@@ -1,4 +1,4 @@
-from ...socketio_driver.communicator import Communicator
+from ..communicator import Communicator
 
 
 class SocketDriver:
