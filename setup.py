@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="masonite-socketio-driver",
-    version='2.0.3',
+    version='2.0.4',
     packages=[
         "socketio_driver",
         "socketio_driver.config",
@@ -17,12 +17,12 @@ setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     # The project's main homepage.
-    url="https://github.com/yubarajshrestha/masonite-socketio-driver",
+    url="https://github.com/py-package/masonite-socketio-driver",
     # Author details
     author="Yubaraj Shrestha",
-    author_email="companion.krish@outlook.com",
+    author_email="yubaraj@pypackage.com",
     project_urls={
-        "Bug Tracker": "https://github.com/yubarajshrestha/masonite-socketio-driver/issues",
+        "Bug Tracker": "https://github.com/py-package/masonite-socketio-driver/issues",
     },
     classifiers=[
         # How mature is this project? Common values are
