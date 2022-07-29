@@ -1,5 +1,8 @@
+from masonite.configuration import config
+import json
 import redis
 import msgpack
+from .models.socket_client import SocketClient
 
 
 class Communicator:
@@ -7,8 +10,15 @@ class Communicator:
     EVENT = 2
     BINARY_EVENT = 5
 
-    def __init__(self, opts):
-        self._opts = opts
+    def __init__(self, application):
+        self.config = config("broadcast").get("broadcasts").get("socketio")
+        self.application = application
+
+        self._opts = {
+            "host": self.config.get("host"),
+            "port": self.config.get("port"),
+        }
+
         self._rooms = []
         self._flags = {}
 
@@ -102,6 +112,14 @@ class Communicator:
 
     def pubsub(self):
         return self._client.pubsub()
+
+    def clients(self):
+        client_keys = self._client.keys(pattern="mbroadcast_users:*")
+        return [self.user(key) for key in client_keys]
+
+    def client(self, id):
+        client_json_string = self._client.get(id)
+        return SocketClient(**json.loads(client_json_string))
 
     def authenticate(self):
         return True
