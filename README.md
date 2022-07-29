@@ -17,6 +17,10 @@
 
 It's an extra broadcast driver support for SocketIO in masonite 4, it extends default masonite broadcast driver to support SocketIO.
 
+**Masonite Broadcast Server and Client Library**
+- [x] [Broadcast Server](https://github.com/py-package/masonite-broadcast-server)
+- [x] [broadcast Client](https://github.com/py-package/masonite-broadcast-client)
+
 **Setup**
 
 Install package using pip:
