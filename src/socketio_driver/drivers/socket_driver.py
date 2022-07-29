@@ -1,6 +1,3 @@
-from ..communicator import Communicator
-
-
 class SocketDriver:
     def __init__(self, application) -> None:
         self.application = application
@@ -15,12 +12,7 @@ class SocketDriver:
         if self.connection:
             return self.connection
 
-        self.connection = Communicator(
-            {
-                "host": self.options.get("host"),
-                "port": self.options.get("port"),
-            }
-        )
+        self.connection = self.application.make("communicator")
 
         return self.connection
 
