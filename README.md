@@ -17,6 +17,10 @@
 
 It's an extra broadcast driver support for SocketIO in masonite 4, it extends default masonite broadcast driver to support SocketIO.
 
+**Masonite Broadcast Server and Client Library**
+- [x] [Broadcast Server](https://github.com/py-package/masonite-broadcast-server)
+- [x] [broadcast Client](https://github.com/py-package/masonite-broadcast-client)
+
 **Setup**
 
 Install package using pip:
@@ -75,4 +79,15 @@ class YourController(Controller):
             "message": "Hello World"
         }
         broadcast.channel(["channel-name"], "event-name", broadcast_data)
+```
+
+**Helpers**
+
+List all connected clients:
+    
+```python
+from socketio_driver.facades import Communicator
+
+communicator.clients() # get list of connected clients
+communicator.client(id='client-id') # get client by id, id is basically a socket.io session id
 ```

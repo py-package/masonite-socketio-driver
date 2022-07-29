@@ -2,6 +2,8 @@
 
 from masonite.packages import PackageProvider
 
+from src.socketio_driver.communicator import Communicator
+
 from ..drivers.socket_driver import SocketDriver
 
 
@@ -12,6 +14,7 @@ class SocketProvider(PackageProvider):
 
     def register(self):
         super().register()
+        self.application.bind("communicator", Communicator(self.application))
         self.application.make("broadcast").add_driver("socketio", SocketDriver(self.application))
 
     def boot(self):
