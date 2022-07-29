@@ -76,3 +76,14 @@ class YourController(Controller):
         }
         broadcast.channel(["channel-name"], "event-name", broadcast_data)
 ```
+
+**Helpers**
+
+List all connected clients:
+    
+```python
+from socketio_driver.facades import Communicator
+
+communicator.clients() # get list of connected clients
+communicator.client(id='client-id') # get client by id, id is basically a socket.io session id
+```

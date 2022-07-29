@@ -5,9 +5,10 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="masonite-socketio-driver",
-    version='2.0.5',
+    version='2.0.6',
     packages=[
         "socketio_driver",
+        "socketio_driver.models",
         "socketio_driver.config",
         "socketio_driver.drivers",
         "socketio_driver.providers"
@@ -29,7 +30,7 @@ setup(
         #   3 - Alpha
         #   4 - Beta
         #   5 - Production/Stable
-        "Development Status :: 3 - Alpha",
+        "Development Status :: 5 - Production/Stable",
         # Indicate who your project is intended for
         "Intended Audience :: Developers",
         "Environment :: Web Environment",
