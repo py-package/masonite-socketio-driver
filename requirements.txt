@@ -1,6 +1,6 @@
 masonite>=4,<5
 masonite-orm>=2,<3
-flake8==4.0.1
+flake8==5.0.2
 pyflakes==2.4.0
 black==22.6.0
 black==22.6.0
