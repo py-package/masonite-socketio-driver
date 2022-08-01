@@ -2,7 +2,7 @@
 
 from masonite.packages import PackageProvider
 
-from src.socketio_driver.communicator import Communicator
+from ..communicator import Communicator
 
 from ..drivers.socket_driver import SocketDriver
 
