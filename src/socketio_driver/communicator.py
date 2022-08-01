@@ -1,5 +1,4 @@
 from masonite.configuration import config
-import json
 import redis
 import msgpack
 from .models.socket_client import SocketClient
@@ -114,12 +113,22 @@ class Communicator:
         return self._client.pubsub()
 
     def clients(self):
-        client_keys = self._client.keys(pattern="mbroadcast_users:*")
-        return [self.user(key) for key in client_keys]
+        client_keys = self._client.keys(pattern="mbroadcast:users:*")
+        return [self.client(key) for key in client_keys]
 
     def client(self, id):
-        client_json_string = self._client.get(id)
-        return SocketClient(**json.loads(client_json_string))
+        client_data = self._client.hmget(id, "userID", "address", "sessionId", "connected")
+        if client_data is None:
+            return None
+
+        userID, address, sessionID, connected = client_data
+
+        userID = userID.decode("utf-8") if userID is not None else None
+        address = address.decode("utf-8") if address is not None else None
+        sessionID = sessionID.decode("utf-8") if sessionID is not None else None
+        connected = connected.decode("utf-8") if connected is not None else False
+
+        return SocketClient(userID, address, sessionID, connected == "true")
 
     def authenticate(self):
         return True
