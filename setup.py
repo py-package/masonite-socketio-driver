@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="masonite-socketio-driver",
-    version='2.0.6',
+    version='2.0.7',
     packages=[
         "socketio_driver",
         "socketio_driver.models",
