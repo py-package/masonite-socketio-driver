@@ -2,6 +2,7 @@ from masonite.configuration import config
 import redis
 import msgpack
 from .models.socket_client import SocketClient
+from masonite.auth.Sign import Sign
 
 
 class Communicator:
@@ -117,18 +118,32 @@ class Communicator:
         return [self.client(key) for key in client_keys]
 
     def client(self, id):
-        client_data = self._client.hmget(id, "userID", "address", "sessionId", "connected")
+        client_data = self._client.hmget(
+            id, "userID", "address", "sessionID", "socketID", "connected"
+        )
         if client_data is None:
             return None
 
-        userID, address, sessionID, connected = client_data
+        userID, address, sessionID, socketID, connected = client_data
 
         userID = userID.decode("utf-8") if userID is not None else None
         address = address.decode("utf-8") if address is not None else None
         sessionID = sessionID.decode("utf-8") if sessionID is not None else None
+        socketID = socketID.decode("utf-8") if socketID is not None else None
         connected = connected.decode("utf-8") if connected is not None else False
+        return SocketClient(userID, address, sessionID, socketID, connected == "true")
 
-        return SocketClient(userID, address, sessionID, connected == "true")
+    def delete_all_clients(self):
+        keys = self._client.keys(pattern="mbroadcast:users:*")
+        for key in keys:
+            self._client.delete(key)
 
-    def authenticate(self):
-        return True
+    def delete(self, client: SocketClient):
+        if client is None:
+            return False
+        self._client.delete(f"mbroadcast:users:{client.sessionID}")
+
+    def authenticate(self, channel, socket_id, user_id):
+        string_to_sign = "%s:%s:%s" % (socket_id, channel, user_id)
+        auth = Sign().sign(string_to_sign)
+        return {"auth": auth}

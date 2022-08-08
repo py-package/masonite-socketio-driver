@@ -69,6 +69,8 @@ BROADCAST_DRIVER=socketio
 **Example**
 
 ```python
+# broadcast to given channels
+
 from masonite.controllers import Controller
 from masonite.broadcasting import Broadcast
 
@@ -81,13 +83,54 @@ class YourController(Controller):
         broadcast.channel(["channel-name"], "event-name", broadcast_data)
 ```
 
-**Helpers**
-
-List all connected clients:
-    
 ```python
+# broadcast to selected users/clients
+
+from masonite.controllers import Controller
+from masonite.broadcasting import Broadcast
 from socketio_driver.facades import Communicator
 
-communicator.clients() # get list of connected clients
-communicator.client(id='client-id') # get client by id, id is basically a socket.io session id
+class YourController(Controller):
+
+    def your_function(self, broadcast: Broadcast):
+        broadcast_data = {
+            "message": "Hello World"
+        }
+        clients = Communicator.clients()
+        ids = [client.socketID for client in clients]
+        broadcast.channel(ids, "event-name", broadcast_data)
+
+
+    def or_another_function(self, broadcast: Broadcast):
+        broadcast_data = {
+            "message": "Hello World"
+        }
+        clients = Communicator.clients()
+        broadcast.driver("socketio").user(clients[0]).send("event-name", broadcast_data)
+```
+
+**Helpers**
+
+Facade helpers...
+
+```python
+from socketio_driver.facades import Communicator
+```
+
+```python
+# List all clients:  
+Communicator.clients()
+```
+```python
+# Get client by sessionID
+Communicator.client(id='client-session-id')
+```
+```python
+# Delete all clients
+Communicator.delete_all_clients()
+```
+```python
+# Delete client by SocketClient instance
+Communicator.delete(client)
+
 ```

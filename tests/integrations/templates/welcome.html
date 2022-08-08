@@ -39,27 +39,26 @@
 
     const broadcast = new MasoniteBroadcastClient({
       url: 'http://localhost:3000/',
+      // broadcastUrl: 'http://localhost:8000/pusher/auth',
     })
 
-    broadcast.listen("welcome", (data) => {
-      console.log(data);
-    });
-
-    broadcast.listen("chat", (data) => {
-      console.log("Chat Data", data);
+    broadcast.onClientConnected(function (user) {
+      console.log(user);
     })
 
-    broadcast.listen("PublicEvent", (data) => {
-      console.log(data);
-    });
+    const subscription = broadcast.subscribe(channel)
 
-    broadcast.listen("PrivateEvent", (data) => {
+    subscription.listen("message", (data) => {
+      console.log(data);
+    }).listen("PublicEvent", (data) => {
+      console.log(data);
+    }).listen("PrivateEvent", (data) => {
       console.log(data);
     });
 
     const TestButton = document.getElementById("test");
     TestButton.addEventListener("click", () => {
-      broadcast.speak("welcome", {
+      subscription.emit("message", {
         message: "Hello World",
       });
     });
