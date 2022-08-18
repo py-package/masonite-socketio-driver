@@ -1,9 +1,7 @@
 """ A SocketProvider Service Provider"""
 
 from masonite.packages import PackageProvider
-
 from ..communicator import Communicator
-
 from ..drivers.socket_driver import SocketDriver
 
 
