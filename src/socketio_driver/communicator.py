@@ -119,19 +119,20 @@ class Communicator:
 
     def client(self, id):
         client_data = self._client.hmget(
-            id, "userID", "address", "sessionID", "socketID", "connected"
+            id, "userID", "address", "sessionID", "socketID", "connected", "extra"
         )
         if client_data is None:
             return None
 
-        userID, address, sessionID, socketID, connected = client_data
+        userID, address, sessionID, socketID, connected, extra = client_data
 
         userID = userID.decode("utf-8") if userID is not None else None
         address = address.decode("utf-8") if address is not None else None
         sessionID = sessionID.decode("utf-8") if sessionID is not None else None
         socketID = socketID.decode("utf-8") if socketID is not None else None
         connected = connected.decode("utf-8") if connected is not None else False
-        return SocketClient(userID, address, sessionID, socketID, connected == "true")
+        extra = extra.decode("utf-8") if extra is not None else ''
+        return SocketClient(userID, address, sessionID, socketID, connected == "true", extra)
 
     def delete_all_clients(self):
         keys = self._client.keys(pattern="mbroadcast:users:*")
